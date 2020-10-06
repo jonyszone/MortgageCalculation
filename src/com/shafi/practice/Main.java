@@ -7,6 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
 	// mortgage calculator
+        final byte MONTHS_IN_YEAR = 12;
+        final byte PERCENT = 100;
+
         Scanner scanner = new Scanner(System.in);
 
         //P
@@ -16,12 +19,12 @@ public class Main {
         //r
         System.out.print("Annual Interest Rate: ");
         float interestRateSc = scanner.nextFloat();
-        float interestRate = interestRateSc/100/12;
+        float interestRate = interestRateSc/PERCENT/MONTHS_IN_YEAR;
         //n
         //take in years
         System.out.print("Period (Years): ");
-        byte numberOfPaymentSc = scanner.nextByte();
-        int numberOfPayment = numberOfPaymentSc * 12;
+        byte numberOfPaymentInYear = scanner.nextByte();
+        int numberOfPayment = numberOfPaymentInYear * MONTHS_IN_YEAR;
 
         /* M = Mortgage:
 
