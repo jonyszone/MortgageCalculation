@@ -6,25 +6,50 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-	// mortgage calculator
+        // mortgage calculator
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
+
+        int principle = 0;
+        float interestRate = 0;
+        int numberOfPayment = 0;
+
 
         Scanner scanner = new Scanner(System.in);
 
         //P
-        System.out.print("Principal: ");
-        int principle = scanner.nextInt();
+        while (true) {
+            System.out.print("Principal: ");
+            principle = scanner.nextInt();
+            if (principle >= 1000 && principle <= 1_000_000)
+                break;
+            System.out.println("Enter a value between 1000 and 1000000");
+        }
+
 
         //r
-        System.out.print("Annual Interest Rate: ");
-        float interestRateSc = scanner.nextFloat();
-        float interestRate = interestRateSc/PERCENT/MONTHS_IN_YEAR;
+        while (true) {
+            System.out.print("Annual Interest Rate: ");
+            float interestRateSc = scanner.nextFloat();
+            if (interestRateSc >= 1 && interestRateSc <= 30){
+                interestRate = interestRateSc / PERCENT / MONTHS_IN_YEAR;
+                break;
+            }
+            System.out.println("Enter a value between 1 and 30");
+        }
+
         //n
         //take in years
-        System.out.print("Period (Years): ");
-        byte numberOfPaymentInYear = scanner.nextByte();
-        int numberOfPayment = numberOfPaymentInYear * MONTHS_IN_YEAR;
+        while (true){
+            System.out.print("Period (Years): ");
+            byte numberOfPaymentInYear = scanner.nextByte();
+            if (numberOfPaymentInYear >= 1 && numberOfPaymentInYear <= 30){
+                numberOfPayment = numberOfPaymentInYear * MONTHS_IN_YEAR;
+                break;
+            }
+            System.out.println("Enter a value between 1 and 30");
+        }
+
 
         /* M = Mortgage:
 
@@ -33,9 +58,10 @@ public class Main {
          */
         System.out.println();
         double mortGage = principle * (interestRate * Math.pow(1 + interestRate, numberOfPayment))
-                / (Math.pow(1 + interestRate, numberOfPayment) -1);
+                / (Math.pow(1 + interestRate, numberOfPayment) - 1);
+
 
         String mortGageCurrency = NumberFormat.getCurrencyInstance().format(mortGage);
-        System.out.println("Mortgage: "+mortGageCurrency);
+        System.out.println("Mortgage: " + mortGageCurrency);
     }
 }
